@@ -1,0 +1,5 @@
+
+
+class Scenario:
+    def execute():
+        ...
