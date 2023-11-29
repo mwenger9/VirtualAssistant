@@ -1,20 +1,14 @@
-import speech_recognition as sr
-import utils
-from nltk.corpus import stopwords
-from nltk import word_tokenize
-from nltk.tokenize import sent_tokenize
 from nltk import download
 import re
-from nltk.stem import PorterStemmer
 import json
 import re
-
 
 class ScenarioManager:
 
 
       french_stopwords : set = {}
       keyword_scenario_mapping : dict = {}
+      
 
       def __init__(self) -> None:
 
@@ -33,35 +27,17 @@ class ScenarioManager:
             for word in request :
                   if self.keyword_scenario_mapping.get(word,None):
                         return self.keyword_scenario_mapping.get(word)
+                  
+      def handle_and_execute_request(self,request : str):
+            parsed_scenario = self.parse_request(request)
 
+            if parsed_scenario in globals() and isinstance(globals()[parsed_scenario], type):
+                  scenario_instance = globals()[parsed_scenario]()
+                  print(f"executing scenario {parsed_scenario}")
+                  scenario_instance.execute()
+            else:
+                  print("Class not found.")
 
-
-if __name__ == "__main__":
-
-      download("punkt")
-
-      scenarioManager = ScenarioManager()
-
-
-      res  = scenarioManager.parse_request("Quel temps fait-il à Tokyo ?")
-      print(res)
-
-      res  = scenarioManager.parse_request("Je souhaite connaitre la météo.")
-      print(res)
-
-      # with sr.Microphone() as source:
-      #         print("En attente d'une instruction...")
-      #         audio = r.listen(source)
-
-      # try:
-      #         request = r.recognize_google(audio, language='fr-FR')
-      #         print(request)
-      #         parse_request(request)
-      # except sr.UnknownValueError:
-      #         print("Je n'ai pas bien compris")
-      # except sr.RequestError as e:
-      #         print("Could not request results from Google Speech Recognition service; {0}".format(e))
-      #         request = "stop"
 
 
 

@@ -3,5 +3,9 @@
     "température":"weatherScenario",
     "météo":"weatherScenario",
     "temps":"weatherScenario",
-    "chifoumi":"chifoumiScenario"
+    "chifoumi":"chifoumiScenario",
+    "echecs":"chessScenario"
 }
+
+
+
