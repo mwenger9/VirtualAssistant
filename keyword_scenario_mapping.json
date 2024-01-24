@@ -4,7 +4,11 @@
     "météo":"weatherScenario",
     "temps":"weatherScenario",
     "chifoumi":"chifoumiScenario",
-    "echecs":"chessScenario"
+    "echecs":"chessScenario",
+    "résumé":"textSummary",
+    "article":"textSummary",
+    "texte":"textSummary",
+    "résumer":"textSummary"
 }
 
 

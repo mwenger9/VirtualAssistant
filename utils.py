@@ -5,6 +5,9 @@ import speech_recognition as sr
 import contextlib
 import sys
 from time import sleep
+from TTS.api import TTS
+
+#better_tts = TTS(model_name="tts_models/fr/css10/vits")
 
 def speak(text):
     tts = gTTS(text=text, lang='fr')
@@ -12,6 +15,11 @@ def speak(text):
     playsound("temp.mp3")
     sleep(0.2)
     os.remove("temp.mp3")
+
+# def speak_better(text):
+#     better_tts.tts_to_file(text)
+#     playsound("output.wav")
+#     os.remove("output.wav")
 
 
 def speak_mmpg(text):

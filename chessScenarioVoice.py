@@ -3,8 +3,31 @@ import chess.svg
 from stockfish import Stockfish
 from PyQt5.QtSvg import QSvgWidget
 from PyQt5.QtWidgets import QApplication, QWidget
+from PyQt5.QtCore import Qt, QThread, pyqtSignal
 from utils import *
 from time import sleep
+
+
+class SpeakThread(QThread):
+    finished = pyqtSignal()
+
+    def __init__(self, text):
+        super().__init__()
+        self.text = text
+
+    def run(self):
+        speak(self.text)
+        self.finished.emit()
+
+class ListenThread(QThread):
+    finished = pyqtSignal(str)
+
+    def run(self):
+        result = listen_once().lower().replace(" ", "")
+        self.finished.emit(result)
+
+
+
 class MainWindow(QWidget):
     def __init__(self,user_color="white"):
         super().__init__()
