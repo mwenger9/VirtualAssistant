@@ -1,16 +1,11 @@
 import pytesseract
+import cv2
+
+img = cv2.imread("testocr.jpg")
+#C:\Users\Rennes\AppData\Local\Programs\Tesseract-OCR
+pytesseract.pytesseract.tesseract_cmd = "C:\\Users\\Rennes\\AppData\\Local\\Programs\\Tesseract-OCR\\tesseract.exe"
 
 
-print(pytesseract.image_to_string("testocr.png",lang="eng"))
+text = pytesseract.image_to_string(img,lang="fra")
 
-# import matplotlib.pyplot as plt
-# import keras_ocr
-# from pprint import pprint
-# pipeline = keras_ocr.pipeline.Pipeline()
-
-
-# images = [keras_ocr.tools.read("testocr.png")]
-
-# prediction = pipeline.recognize(images)
-# prediction = [e[0] for e in prediction[0]]
-# pprint(prediction)
+print(text)

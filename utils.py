@@ -89,3 +89,24 @@ def listen_once() -> str:
             speak("Je n'ai pas bien compris")
         except sr.RequestError as e:
             print("Could not request results from Google Speech Recognition service; {0}".format(e))
+
+def wait_for_keyword(keyword : str):
+
+    request = "start"
+    with ignoreStderr():
+        while not keyword in request:
+            # audio reco
+            r = sr.Recognizer()
+            with sr.Microphone() as source:
+                print("En attente d'une instruction...")
+                audio = r.listen(source)
+
+            try:
+                request = r.recognize_google(audio, language='fr-FR')
+                print(request)
+                return request
+            except sr.UnknownValueError:
+                pass
+            except sr.RequestError as e:
+                print("Could not request results from Google Speech Recognition service; {0}".format(e))
+                request = "stop"
