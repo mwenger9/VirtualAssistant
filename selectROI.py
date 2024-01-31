@@ -20,11 +20,11 @@ def draw_rectangle(event, x, y, flags, param):
     elif event == cv2.EVENT_LBUTTONUP:
         drawing = False
 
-def main():
+def select_roi(img):
     global start_x, start_y, end_x, end_y, drawing
 
     # Read the image
-    img = cv2.imread("testocr.jpg")
+    #img = cv2.imread("testocr.jpg")
 
     # Create a window and set mouse callback to draw rectangle
     cv2.namedWindow('Image')
@@ -56,4 +56,5 @@ def main():
     cv2.destroyAllWindows()
 
 if __name__ == "__main__":
-    main()
+    img = cv2.imread("testocr.jpg")
+    select_roi(img)
